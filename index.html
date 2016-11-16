@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			*{padding: 0;margin: 0;}
+			li{list-style: none;}
+			.header{
+				width: 504px;
+				height: 63px;
+				border-top: 1px solid #000;
+				line-height: 63px;
+				position: relative;
+			}
+			.header h2{
+				font-size: 16px;
+				color: #000;
+				float: left;
+			}
+			.header h2 span{
+				color:#f00;
+			}
+			.header ul{
+				float: left;
+				padding-top: 20px;
+				padding-left: 6px;
+			}
+			.header li{
+				float: left;
+				width: 20px;
+				height: 22px;
+				background: url(img/1.png) no-repeat;
+				cursor: pointer;
+				padding-right: 4px;
+			}
+			.header .active{
+				background: url(img/2.png) no-repeat;
+			}
+			.header .active_2{
+				background: url(img/2_2.png) no-repeat;
+			}
+			.header strong{
+				color: #ef7300;
+				padding-left: 8px;
+			}
+			.header img{
+				position: absolute;
+				top: 13px;
+				left: 220px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oDiv=document.getElementsByTagName('div')[0];
+				var oUl=oDiv.getElementsByTagName('ul')[0];
+				var aLi=oUl.getElementsByTagName('li');
+				var oStrong=oDiv.getElementsByTagName('strong')[0];
+				var oImg=oDiv.getElementsByTagName('img')[0];
+				var arrText=['很差','较差','还行','推荐','力荐'];
+				var oldClass=null;
+				var num=0;
+				var onOff=false;
+				for(var i=0;i<aLi.length;i++){
+					aLi[i].index=i;
+					aLi[i].onmouseover=function(){
+						for(var i=0;i<aLi.length;i++){
+							aLi[i].className='';
+						};
+						for(var i=0;i<this.index+1;i++){
+							this.index+1>2?aLi[i].className='active':aLi[i].className='active_2';
+							oldClass=i;
+						};
+						oImg.style.display='none';
+						oStrong.innerHTML=arrText[this.index];
+					};
+					aLi[i].onmouseout=function(){
+						for(var i=0;i<oldClass+1;i++){
+							aLi[i].className='';
+						};
+						if(onOff==true){
+							for(var i=0;i<num+1;i++){
+								num+1>2?aLi[i].className='active':aLi[i].className='active_2';
+							}
+						}else{
+							oImg.style.display='block';
+						}
+						oStrong.innerHTML=arrText[num];
+					};
+					aLi[i].onclick=function(){
+						for(var i=0;i<this.index+1;i++){
+							num=i;
+						};
+						onOff=true;
+					};
+				};
+			};
+		</script>
+	</head>
+	<body>
+		<div class="header">
+			<h2><span>*</span>总体评价：</h2>
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+			<strong></strong>
+			<img src="img/3.png"/>
+		</div>
+	</body>
+</html>
